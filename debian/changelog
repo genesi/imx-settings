@@ -1,0 +1,7 @@
+imx-settings (10.11.01) maverick; urgency=low
+
+  * udev rules
+  * sysctl rules
+  * firefox preferences script
+
+ -- Matt Sealey <matt@genesi-usa.com>  Sat, 18 Dec 2010 14:43:19 +0600

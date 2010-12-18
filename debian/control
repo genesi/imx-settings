@@ -1,0 +1,26 @@
+Source: imx-settings
+Priority: optional
+Architecture: all
+Maintainer: Steev Klimaszewski, Genesi USA, Inc. <steev@genesi-usa.com>
+Standards-Version: 3.9.1
+
+Package: imx-sysctl-rules
+Section: admin
+Priority: optional
+Architecture: armel
+Depends: procps
+Description: sysctl rules for improved performance on Freescale i.MX processors
+
+Package: imx-udev-rules
+Section: admin
+Priority: optional
+Architecture: armel
+Depends: udev (>= 162-2.2)
+Description: udev rules for devices on Freescale i.MX processors
+
+Package: imx-firefox-prefs
+Section: admin
+Priority: optional
+Architecture: armel
+Depends: firefox (>= 3.6.13)
+Description: Firefox settings for improved performance on Freescale i.MX processors 
