@@ -1,7 +1,8 @@
 Source: imx-settings
 Priority: optional
 Architecture: all
-Maintainer: Steev Klimaszewski, Genesi USA, Inc. <steev@genesi-usa.com>
+Maintainer: Matt Sealey <matt@genesi-usa.com>
+Uploaders: Steev Klimaszewski <steev@genesi-usa.com>, Konstantinos Margaritis <markos@genesi-usa.com>, Luca Barbato <lu_zero@genesi-usa.com>
 Standards-Version: 3.9.1
 
 Package: imx-sysctl-rules
