@@ -1,1 +1,1 @@
-30-imx.conf	/etc/sysctl.d/
+etc/sysctl.d/*.conf

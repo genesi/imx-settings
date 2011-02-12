@@ -1,6 +1,5 @@
 Source: imx-settings
 Priority: optional
-Architecture: all
 Maintainer: Matt Sealey <matt@genesi-usa.com>
 Uploaders: Steev Klimaszewski <steev@genesi-usa.com>, Konstantinos Margaritis <markos@genesi-usa.com>, Luca Barbato <lu_zero@genesi-usa.com>
 Standards-Version: 3.9.1
@@ -23,5 +22,17 @@ Package: imx-firefox-prefs
 Section: admin
 Priority: optional
 Architecture: armel
-Depends: firefox (>= 3.6.13)
+Depends: firefox (>= 3.6.9)
 Description: Firefox settings for improved performance on Freescale i.MX processors 
+
+Package: imx-boot-scripts
+Section: admin
+Priority: optional
+Architecture: armel
+Description: modules, rc.local for improved performance on Genesi Efika MX platforms
+
+Package: imx-pulseaudio-config
+Section: admin
+Priority: optional
+Architecture: armel
+Description: forces alsa to route through pulseaudio
