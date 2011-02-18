@@ -3,4 +3,13 @@
 # This file contains the names of kernel modules that should be loaded
 # at boot time, one per line. Lines beginning with "#" are ignored.
 
+### Start of Genesi Efika MX /etc/modules additions
+
+# load ecryptfs by default. If you don't use encrypted home dirs or
+# encrypted swap or encrypted anything else, you can comment this out
+ecryptfs
+
+# load gpu module by default. You need this for accelerated graphics.
 gpu
+
+### End of Genesi Efika MX /etc/modules additions

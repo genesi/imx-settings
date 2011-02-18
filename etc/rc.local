@@ -11,12 +11,27 @@
 #
 # By default this script does nothing.
 
-if [ -f /sys/class/graphics/fb0/audio ]; then
-	modprobe snd-spdif
-	modprobe snd-soc-imx-3stack-sgtl5000
+
+machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+case "$machine" in
+	"Genesi Efika MX (Smartbook)")
+		board=efikasb
+	;;
+	"Genesi Efika MX (Smarttop)")
+		board=efikamx
+	;;
+esac
+
+if [ "${machine}" = "efikamx" ]; then
+	if [ -f /sys/class/graphics/fb0/audio ]; then
+		modprobe snd-spdif
+		modprobe snd-soc-imx-3stack-sgtl5000
+	else
+		modprobe snd-soc-imx-3stack-sgtl5000
+		modprobe snd-spdif
+	fi
 else
 	modprobe snd-soc-imx-3stack-sgtl5000
-	modprobe snd-spdif
 fi
 
 exit 0
