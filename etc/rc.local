@@ -22,7 +22,7 @@ case "$machine" in
 	;;
 esac
 
-if [ "${machine}" = "efikamx" ]; then
+if [ "${board}" = "efikamx" ]; then
 	if [ -f /sys/class/graphics/fb0/audio ]; then
 		modprobe snd-spdif
 		modprobe snd-soc-imx-3stack-sgtl5000
