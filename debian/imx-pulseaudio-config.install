@@ -1,1 +1,2 @@
 etc/asound.conf
+var/lib/alsa/asound.state
