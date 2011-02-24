@@ -1,4 +1,4 @@
-imx-settings (1.11.02.11) maverick; urgency=low
+imx-settings (1.1.0-20110211) maverick; urgency=low
 
   * firefox preferences done properly
   * rc.local
@@ -7,7 +7,7 @@ imx-settings (1.11.02.11) maverick; urgency=low
 
  -- Matt Sealey <matt@genesi-usa.com>  Fri, 11 Feb 2011 11:00:51 +0600
 
-imx-settings (1.10.11.01) maverick; urgency=low
+imx-settings (1.0.0-20101218) maverick; urgency=low
 
   * udev rules
   * sysctl rules
