@@ -22,16 +22,21 @@ case "$machine" in
 	;;
 esac
 
+# only load SPDIF if the HDMI monitor has audio support
 if [ "${board}" = "efikamx" ]; then
 	if [ -f /sys/class/graphics/fb0/audio ]; then
 		modprobe snd-spdif
-		modprobe snd-soc-imx-3stack-sgtl5000
-	else
-		modprobe snd-soc-imx-3stack-sgtl5000
-		modprobe snd-spdif
 	fi
-else
-	modprobe snd-soc-imx-3stack-sgtl5000
 fi
+
+# ondemand only on Smartbook where power saving is more important
+# Smarttop at higher resolution displays suffers if ondemand is
+# allowed to scale the CPU frequency as it doesn't scale efficiently
+if [ "${board}" = "efikasb" ]; then
+	modprobe cpufreq_ondemand
+fi
+
+# load audio module manually (after spdif)
+modprobe snd-soc-imx-3stack-sgtl5000
 
 exit 0
