@@ -3,6 +3,8 @@ imx-settings (1.2.0-20110306) maverick; urgency=low
   * rc.local fixed to handle audio modules properly
   * cpufreq_ondemand now managed by boot script and not kernel autoprobe
     fixes performance issues with very high resolution displays on Smarttop
+  * only load ecryptfs if absolutely required
+  * moved gpu loading to rc.local
 
  -- Matt Sealey <matt@genesi-usa.com>  Sun, 06 Mar 2011 00:30:23 +0600
 

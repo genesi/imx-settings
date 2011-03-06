@@ -36,7 +36,15 @@ if [ "${board}" = "efikasb" ]; then
 	modprobe cpufreq_ondemand
 fi
 
+# If you don't use encrypted home dirs or encrypted swap or encrypted anything else,
+# ecryptfs-utils can be uninstalled (try apt-get autoremove) - and it won't be loaded
+ecryptfs=$(dpkg -s ecryptfs-utils 2>/dev/null | grep Status\: | grep \ installed)
+if [ "x${ecryptfs}" != "x" ]; then
+	modprobe ecryptfs
+fi
+
 # load audio module manually (after spdif)
 modprobe snd-soc-imx-3stack-sgtl5000
+modprobe gpu
 
 exit 0
