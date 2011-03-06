@@ -1,3 +1,11 @@
+imx-settings (1.2.0-20110306) maverick; urgency=low
+
+  * rc.local fixed to handle audio modules properly
+  * cpufreq_ondemand now managed by boot script and not kernel autoprobe
+    fixes performance issues with very high resolution displays on Smarttop
+
+ -- Matt Sealey <matt@genesi-usa.com>  Sun, 06 Mar 2011 00:30:23 +0600
+
 imx-settings (1.1.0-20110211) maverick; urgency=low
 
   * firefox preferences done properly
