@@ -1,0 +1,78 @@
+#!/bin/sh -e
+### BEGIN INIT INFO
+# Provides:          efikamx
+# Required-Start:    
+# Required-Stop:     
+# Should-Start:      udev
+# Should-Stop:       udev
+# X-Start-Before:    cryptdisks-early pulseaudio gdm
+# X-Interactive:     true
+# Default-Start:     2 3 4 5
+# Default-Stop:      1
+# Short-Description: EfikaMX module handler
+# Description:
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+case "$machine" in
+	"Genesi Efika MX (Smartbook)")
+		board=efikasb
+	;;
+	"Genesi Efika MX (Smarttop)")
+		board=efikamx
+	;;
+esac
+
+efikamx_audio () {
+	# handle the case where you want to hotplug the monitor and get SPDIF
+	# but we do not load it on boot if there is no SPDIF by default since
+	# it will possibly direct audio away from the internal speaker
+
+	# you can "reload" this service to get spdif to load if needed at any
+	# time. it will stay loaded until reboot (and only load then if needed)
+
+	if [ "${board}" = "efikamx" ]; then
+		if [ -f /sys/class/graphics/fb0/audio ]; then
+			modprobe snd-spdif
+		fi
+	fi
+}
+
+efikamx_start () {
+	log_daemon_msg "Configuring Efika MX"
+
+	# needed for encrypted home directories
+	if [ -f "/var/lib/dpkg/info/ecryptfs-utils.list" ]; then
+		modprobe ecryptfs
+	fi
+
+	# required modules for all systems
+	modprobe gpu
+	modprobe snd-soc-imx-3stack-sgtl5000
+
+	# audio
+	efikamx_audio
+
+	if [ "${board}" = "efikasb" ]; then
+		modprobe cpufreq_ondemand
+	fi
+
+	log_end_msg ${status}
+}
+
+case "$1" in
+	start)
+		efikamx_start
+		;;
+	reload)
+		efikamx_audio
+		;;
+	*)
+		echo "Usage: /etc/init.d/efikamx {start|reload}"
+		exit 1
+		;;
+esac
+
+exit 0
