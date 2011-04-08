@@ -1,0 +1,8 @@
+# Don't Hibernate on Efika MX (since it doesn't work, no kernel support)
+
+[disable hibernate]
+Identity=unix-user:*
+Action=org.freedesktop.upower.hibernate
+ResultAny=no
+ResultInactive=no
+ResultActive=no 
