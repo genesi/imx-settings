@@ -32,4 +32,4 @@ fi
 
 # now add the init script magic!
 
-update-rc.d efikamx start 10 S
+update-rc.d efikamx start 10 S .

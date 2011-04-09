@@ -8,7 +8,7 @@
 # X-Start-Before:    pcmciautils cryptdisks-early pulseaudio gdm
 # X-Interactive:     true
 # Default-Start:     S
-# Default-Stop:      S
+# Default-Stop:
 # Short-Description: EfikaMX module handler
 # Description: Loads and manages the required kernel module ordering for the Efika MX
 ### END INIT INFO
@@ -67,7 +67,14 @@ case "$1" in
 		efikamx_start
 		;;
 	reload)
+	restart)
+	force-reload)
 		efikamx_audio
+		;;
+	stop)
+		;;
+	status)
+		echo "Running on $machine"
 		;;
 	*)
 		echo "Usage: /etc/init.d/efikamx {start|reload}"
