@@ -9,7 +9,6 @@ emits efikamx
 
 task
 script
-
 	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 	case "$machine" in
 		"Genesi Efika MX (Smartbook)")

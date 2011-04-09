@@ -3,7 +3,8 @@
 # remove the old "custom" files if the user didn't make any changes to them
 #
 
-if [ `md5sum /etc/rc.local | awk '{print $1}'` = "f6f8bcdead3b7e2ce8d7142ceaa28862" ]; then
+hash=$(md5sum /etc/rc.local 2>/dev/null | awk '{print $1}')
+if [ "x${hash}" = "xf6f8bcdead3b7e2ce8d7142ceaa28862" ] || [ ! -e /etc/rc.local ]; then
 cat << 'EOF' >/etc/rc.local
 #!/bin/sh -e
 #
@@ -22,7 +23,8 @@ exit 0
 EOF
 fi
 
-if [ `md5sum /etc/modules | awk '{print $1}'` = "1b6e47c2ba97f52b253814ed971d8acd" ]; then
+hash=$(md5sum /etc/modules 2>/dev/null | awk '{print $1}')
+if [ "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] || [ ! -e /etc/modules ]; then
 cat << 'EOF' >/etc/modules
 # /etc/modules: kernel modules to load at boot time.
 #
