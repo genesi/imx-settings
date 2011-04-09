@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-DEB_UPDATE_RCD_PARAMS = start 10 S .
-
 build: build-stamp
 build-stamp:
 	touch $@
@@ -12,7 +10,6 @@ clean:
 install: install-stamp
 install-stamp: build-stamp
 	dh_prep
-	dh_installinit -pimx-boot-scripts --name=efikamx
 	touch $@
 
 binary-arch: install
