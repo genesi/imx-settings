@@ -1,16 +1,16 @@
 #!/bin/sh -e
 ### BEGIN INIT INFO
 # Provides:          efikamx
-# Required-Start:    
-# Required-Stop:     
+# Required-Start:
+# Required-Stop:
 # Should-Start:      udev
 # Should-Stop:       udev
-# X-Start-Before:    cryptdisks-early pulseaudio gdm
+# X-Start-Before:    pcmciautils cryptdisks-early pulseaudio gdm
 # X-Interactive:     true
-# Default-Start:     2 3 4 5
-# Default-Stop:      1
+# Default-Start:     S
+# Default-Stop:      S
 # Short-Description: EfikaMX module handler
-# Description:
+# Description: Loads and manages the required kernel module ordering for the Efika MX
 ### END INIT INFO
 
 . /lib/lsb/init-functions
