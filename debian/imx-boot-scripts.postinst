@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# first, remove the old "custom" files if the user didn't make any changes to them
+
+if [ `md5sum /etc/rc.local | awk '{print $1}'` = "f6f8bcdead3b7e2ce8d7142ceaa28862" ]; then
+cat << 'EOF' >/etc/rc.local
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+exit 0
+EOF
+fi
+
+if [ `md5sum /etc/modules | awk '{print $1}'` = "1b6e47c2ba97f52b253814ed971d8acd" ]; then
+cat << 'EOF' >/etc/modules
+# /etc/modules: kernel modules to load at boot time.
+#
+# This file contains the names of kernel modules that should be loaded
+# at boot time, one per line. Lines beginning with "#" are ignored.
+EOF
+fi
+
+# now add the init script magic!
+
+update-rc.d efikamx start 10 S

@@ -1,4 +1,2 @@
 etc/modprobe.d/efikamx.conf
-etc/modules
 etc/init.d/efikamx
-etc/rc.local
