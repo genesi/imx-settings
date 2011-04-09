@@ -1,5 +1,11 @@
 imx-settings (1.3.0-20110408) maverick; urgency=low
 
+  * Init script updates (thanks wschaub) and postinst hook
+
+ -- Matt Sealey <matt@genesi-usa.com>  Fri, 08 Apr 2011 19:15:11 +0600
+
+imx-settings (1.2.99-20110408) maverick; urgency=low
+
   * PolicyKit addition for UPower to disable hibernation (PD 14424, thanks wschaub)
 
  -- Matt Sealey <matt@genesi-usa.com>  Fri, 08 Apr 2011 13:24:56 +0600
