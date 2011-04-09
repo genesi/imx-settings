@@ -1,6 +1,7 @@
 #!/bin/sh
-
-# first, remove the old "custom" files if the user didn't make any changes to them
+#
+# remove the old "custom" files if the user didn't make any changes to them
+#
 
 if [ `md5sum /etc/rc.local | awk '{print $1}'` = "f6f8bcdead3b7e2ce8d7142ceaa28862" ]; then
 cat << 'EOF' >/etc/rc.local
@@ -29,7 +30,3 @@ cat << 'EOF' >/etc/modules
 # at boot time, one per line. Lines beginning with "#" are ignored.
 EOF
 fi
-
-# now add the init script magic!
-
-update-rc.d efikamx start 10 S .

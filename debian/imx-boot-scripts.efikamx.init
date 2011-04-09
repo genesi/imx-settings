@@ -1,12 +1,9 @@
-#!/bin/sh -e
+#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          efikamx
 # Required-Start:
 # Required-Stop:
-# Should-Start:      udev
-# Should-Stop:       udev
 # X-Start-Before:    pcmciautils cryptdisks-early pulseaudio gdm
-# X-Interactive:     true
 # Default-Start:     S
 # Default-Stop:
 # Short-Description: EfikaMX module handler
@@ -66,9 +63,7 @@ case "$1" in
 	start)
 		efikamx_start
 		;;
-	reload)
-	restart)
-	force-reload)
+	reload | restart | force-reload)
 		efikamx_audio
 		;;
 	stop)

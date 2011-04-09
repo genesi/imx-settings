@@ -10,6 +10,7 @@ clean:
 install: install-stamp
 install-stamp: build-stamp
 	dh_prep
+	dh_installinit -pimx-boot-scripts --name=efikamx
 	touch $@
 
 binary-arch: install
