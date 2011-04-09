@@ -1,0 +1,51 @@
+# efikamx - Prepare modules and settings for Efika MX systems on boot
+
+description	"Prepare modules and settings for Efika MX systems on boot"
+
+start on (startup
+	  and started udev)
+
+emits efikamx
+
+task
+script
+
+	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+	case "$machine" in
+		"Genesi Efika MX (Smartbook)")
+			board=efikasb
+		;;
+		"Genesi Efika MX (Smarttop)")
+			board=efikamx
+		;;
+		*)
+			exit 0
+		;;
+	esac
+
+	# needed for encrypted home directories
+	if [ -f "/var/lib/dpkg/info/ecryptfs-utils.list" ]; then
+		modprobe ecryptfs
+	fi
+
+	# required modules for all systems
+	modprobe gpu
+	modprobe snd-soc-imx-3stack-sgtl5000
+
+	# handle the case where you want to hotplug the monitor and get SPDIF
+	# but we do not load it on boot if there is no SPDIF by default since
+	# it will possibly direct audio away from the internal speaker
+
+	# ideally we could "reload" this service to get spdif to load if needed at any
+	# time. it will stay loaded until reboot (and only load then if needed)
+
+	if [ "${board}" = "efikamx" ]; then
+		if [ -f /sys/class/graphics/fb0/audio ]; then
+			modprobe snd-spdif
+		fi
+	fi
+
+	if [ "${board}" = "efikasb" ]; then
+		modprobe cpufreq_ondemand
+	fi
+end script
