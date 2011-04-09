@@ -30,3 +30,5 @@ cat << 'EOF' >/etc/modules
 # at boot time, one per line. Lines beginning with "#" are ignored.
 EOF
 fi
+
+exit 0

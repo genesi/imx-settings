@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+DEB_UPDATE_RCD_PARAMS = start 10 S .
+
 build: build-stamp
 build-stamp:
 	touch $@
