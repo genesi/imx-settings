@@ -1,24 +1,6 @@
 #!/usr/bin/make -f
+%:
+	dh $@
 
-build: build-stamp
-build-stamp:
-	touch $@
-
-clean:
-	dh clean
-
-install: install-stamp
-install-stamp: build-stamp
-	dh_prep
+override_dh_installinit:
 	dh_installinit -pimx-boot-scripts --name=efikamx
-	touch $@
-
-binary-arch: install
-	dh binary-arch
-
-binary-indep: install
-	dh binary-indep
-
-binary: binary-arch binary-indep
-
-.PHONY: build clean install binary-arch binary-indep binary

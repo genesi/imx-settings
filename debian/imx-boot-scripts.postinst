@@ -18,7 +18,7 @@ cat << 'EOF' >/etc/rc.local
 # bits.
 #
 # By default this script does nothing.
-
+#DEBHELPER#
 exit 0
 EOF
 fi

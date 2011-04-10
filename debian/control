@@ -2,6 +2,7 @@ Source: imx-settings
 Priority: optional
 Maintainer: Matt Sealey <matt@genesi-usa.com>
 Uploaders: Steev Klimaszewski <steev@genesi-usa.com>, Konstantinos Margaritis <markos@genesi-usa.com>, Luca Barbato <lu_zero@genesi-usa.com>
+Build-Depends: debhelper (>= 7.0.50~)
 Standards-Version: 3.9.1
 
 Package: imx-sysctl-rules
