@@ -18,10 +18,11 @@ cat << 'EOF' >/etc/rc.local
 # bits.
 #
 # By default this script does nothing.
-#DEBHELPER#
 exit 0
 EOF
 fi
+
+#DEBHELPER#
 
 hash=$(md5sum /etc/modules 2>/dev/null | awk '{print $1}')
 if [ "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] || [ ! -e /etc/modules ]; then
