@@ -1,9 +1,15 @@
 #!/bin/sh
 #
-# remove the old "custom" files if the user didn't make any changes to them
+# remove the old "custom" files - back it up if the hash is different. If not, just replace the damn
+# things with the originals (i.e. we revert previous packages and backup any user additions)
 #
 
+bd=$(date +%s)
 hash=$(md5sum /etc/rc.local 2>/dev/null | awk '{print $1}')
+if [ ! "x${hash}" = "xf6f8bcdead3b7e2ce8d7142ceaa28862" ] && [ -e /etc/rc.local ]; then
+	mv /etc/rc.local "/etc/rc.local.backup-${bd}"
+fi
+
 if [ "x${hash}" = "xf6f8bcdead3b7e2ce8d7142ceaa28862" ] || [ ! -e /etc/rc.local ]; then
 cat << 'EOF' >/etc/rc.local
 #!/bin/sh -e
@@ -25,6 +31,11 @@ fi
 #DEBHELPER#
 
 hash=$(md5sum /etc/modules 2>/dev/null | awk '{print $1}')
+
+if [ ! "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] && [ -e /etc/modules ]; then
+	mv /etc/modules "/etc/modules.backup-${bd}"
+fi
+
 if [ "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] || [ ! -e /etc/modules ]; then
 cat << 'EOF' >/etc/modules
 # /etc/modules: kernel modules to load at boot time.

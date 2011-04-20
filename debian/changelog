@@ -1,8 +1,9 @@
-imx-settings (1.3.0-20110408) maverick; urgency=low
+imx-settings (1.3.0-20110420) maverick; urgency=low
 
-  * Init script updates (thanks wschaub) and postinst hook
+  * Init script updates and postinst hook (thanks wschaub, ScottK)
+  * Firefox preferences update from Freescale 11.03 BSP
 
- -- Matt Sealey <matt@genesi-usa.com>  Fri, 08 Apr 2011 19:15:11 +0600
+ -- Matt Sealey <matt@genesi-usa.com>  Wed, 20 Apr 2011 19:15:11 +0600
 
 imx-settings (1.2.99-20110408) maverick; urgency=low
 
