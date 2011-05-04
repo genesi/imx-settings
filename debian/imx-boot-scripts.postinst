@@ -45,4 +45,7 @@ cat << 'EOF' >/etc/modules
 EOF
 fi
 
+#Disable atomatic prompting for upgrading to the next release
+/bin/sed -i 's/^Prompt=.*$/Prompt=never/' /etc/update-manager/release-upgrades
+
 exit 0
