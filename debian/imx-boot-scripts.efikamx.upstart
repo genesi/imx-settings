@@ -27,10 +27,6 @@ script
 		modprobe ecryptfs
 	fi
 
-	# required modules for all systems
-	modprobe gpu
-	modprobe snd-soc-imx-3stack-sgtl5000
-
 	# handle the case where you want to hotplug the monitor and get SPDIF
 	# but we do not load it on boot if there is no SPDIF by default since
 	# it will possibly direct audio away from the internal speaker
@@ -47,4 +43,8 @@ script
 	if [ "${board}" = "efikasb" ]; then
 		modprobe cpufreq_ondemand
 	fi
+
+	# required modules for all systems
+	modprobe gpu
+	modprobe snd-soc-imx-3stack-sgtl5000
 end script
