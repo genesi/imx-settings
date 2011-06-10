@@ -8,32 +8,32 @@ Standards-Version: 3.9.1
 Package: imx-sysctl-rules
 Section: admin
 Priority: optional
-Architecture: armel
+Architecture: armel armhf
 Depends: procps
 Description: sysctl rules for improved performance on Freescale i.MX processors
 
 Package: imx-udev-rules
 Section: admin
 Priority: optional
-Architecture: armel
+Architecture: armel armhf
 Depends: udev (>= 162-2.2)
 Description: udev rules for devices on Freescale i.MX processors
 
 Package: imx-firefox-prefs
 Section: admin
 Priority: optional
-Architecture: armel
+Architecture: armel armhf
 Depends: firefox (>= 3.6.9)
 Description: Firefox settings for improved performance on Freescale i.MX processors 
 
 Package: imx-boot-scripts
 Section: admin
 Priority: optional
-Architecture: armel
+Architecture: armel armhf
 Description: modules, rc.local for improved performance on Genesi Efika MX platforms
 
 Package: imx-pulseaudio-config
 Section: admin
 Priority: optional
-Architecture: armel
+Architecture: armel armhf
 Description: forces alsa to route through pulseaudio
