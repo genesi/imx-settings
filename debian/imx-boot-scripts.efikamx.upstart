@@ -35,7 +35,7 @@ script
 	# time. it will stay loaded until reboot (and only load then if needed)
 
 	if [ "${board}" = "efikamx" ]; then
-		if [ -f /sys/class/graphics/fb0/audio ]; then
+		if [ -f /sys/class/graphics/fb0/audio -o -f /sys/class/graphics/fb0/phys-link/audio ]; then
 			modprobe snd-spdif
 		fi
 	fi
