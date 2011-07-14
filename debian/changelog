@@ -1,3 +1,10 @@
+imx-settings (2.0.0-20110714) maverick; urgency=low
+
+  * Fix audio sysfs attribute location for new kernel
+  * Bump for release
+
+ -- Matt Sealey <matt@genesi-usa.com>  Thu, 14 Jul 2011 17:25:27 +0600
+
 imx-settings (1.3.1-20110503) maverick; urgency=low
 
   * Add postinst script item to never prompt to dist-upgrade
