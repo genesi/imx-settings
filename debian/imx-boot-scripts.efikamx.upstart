@@ -8,9 +8,12 @@ start on (startup
 emits efikamx
 
 task
+
 script
 	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
-	case "$machine" in
+	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
+
+	case "${machine}" in
 		"Genesi Efika MX (Smartbook)")
 			board=efikasb
 		;;
@@ -18,7 +21,18 @@ script
 			board=efikamx
 		;;
 		*)
+			echo "bailingout aiee"
 			exit 0
+		;;
+	esac
+
+	case "${btype}" in
+		"51020" | "51025")
+			machine="${machine} (i.MX515 TO2)"
+		;;
+
+		"51030")
+			machine="${machine} (i.MX515 TO3)"
 		;;
 	esac
 
@@ -35,7 +49,10 @@ script
 	# time. it will stay loaded until reboot (and only load then if needed)
 
 	if [ "${board}" = "efikamx" ]; then
-		if [ -f /sys/class/graphics/fb0/audio -o -f /sys/class/graphics/fb0/phys-link/audio ]; then
+		if [ -f /sys/class/graphics/fb0/phys-link/audio ]; then
+			modprobe snd-spdif
+		fi
+		if [ -f /sys/class/graphics/fb0/audio ]; then
 			modprobe snd-spdif
 		fi
 	fi
@@ -47,4 +64,14 @@ script
 	# required modules for all systems
 	modprobe gpu
 	modprobe snd-soc-imx-3stack-sgtl5000
+
+	# set up some compressed in-memory dynamic swap
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
+		if [ ! -b /dev/ramzswap0 ]; then
+			modprobe ramzswap disksize_kb=65536
+			sleep 1
+			mkswap -f /dev/ramzswap0
+			swapon -p0 /dev/ramzswap0
+		fi
+	fi
 end script
