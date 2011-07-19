@@ -30,6 +30,7 @@ Package: imx-boot-scripts
 Section: admin
 Priority: optional
 Architecture: armel armhf
+Depends: prep-kernel
 Description: modules, rc.local for improved performance on Genesi Efika MX platforms
 
 Package: imx-pulseaudio-config

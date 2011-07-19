@@ -21,7 +21,6 @@ script
 			board=efikamx
 		;;
 		*)
-			echo "bailingout aiee"
 			exit 0
 		;;
 	esac
