@@ -48,10 +48,14 @@ script
 	# time. it will stay loaded until reboot (and only load then if needed)
 
 	if [ "${board}" = "efikamx" ]; then
+		audio="none"
 		if [ -f /sys/class/graphics/fb0/phys-link/audio ]; then
-			modprobe snd-spdif
+			audio=$(cat /sys/class/graphics/fb0/phys-link/audio)
 		fi
 		if [ -f /sys/class/graphics/fb0/audio ]; then
+			audio=$(cat /sys/class/graphics/fb0/audio)
+		fi
+		if [ "xhdmi" = "x${audio}"]; then
 			modprobe snd-spdif
 		fi
 	fi
@@ -61,8 +65,12 @@ script
 	fi
 
 	# required modules for all systems
-	modprobe gpu
-	modprobe snd-soc-imx-3stack-sgtl5000
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/mxc/amd-gpu/gpu.ko ]; then	
+		modprobe gpu
+	fi
+	if [ -f /lib/modules/`uname -r`/kernel/sound/soc/imx/snd-soc-imx-3stack-sgtl5000.ko ]; then	
+		modprobe snd-soc-imx-3stack-sgtl5000
+	fi
 
 	# set up some compressed in-memory dynamic swap
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
