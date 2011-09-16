@@ -61,7 +61,9 @@ script
 	fi
 
 	if [ "${board}" = "efikasb" ]; then
-		modprobe cpufreq_ondemand
+		if [ -f /lib/modules/`uname -r`/kernel/drivers/cpufreq/cpufreq_ondemand.ko ]; then
+			modprobe cpufreq_ondemand
+		fi
 	fi
 
 	# required modules for all systems
