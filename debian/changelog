@@ -1,4 +1,4 @@
-imx-settings (2.1.0-201100915) maverick; urgency=low
+imx-settings (2.1.0-20110915) maverick; urgency=low
 
   * Fix cpufreq
   * Bump for release
