@@ -1,3 +1,10 @@
+imx-settings (2.1.1-20111019) maverick; urgency=low
+
+  * Fix spdif module loading
+  * Bump compressed swap size to 128MB (just so happens to be roughly the ramzswap default)
+
+ -- Matt Sealey <matt@genesi-usa.com>  Wed, 19 Oct 2011 13:53:18 +0600
+
 imx-settings (2.1.0-20110915) maverick; urgency=low
 
   * Fix cpufreq
