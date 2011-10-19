@@ -1,3 +1,10 @@
+imx-settings (2.1.0-20110915) maverick; urgency=low
+
+  * Fix cpufreq
+  * Bump for release
+
+ -- Matt Sealey <matt@genesi-usa.com>  Thu, 15 Sep 2011 11:48:32 +0600
+
 imx-settings (2.0.0-20110714) maverick; urgency=low
 
   * Fix audio sysfs attribute location for new kernel
