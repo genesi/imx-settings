@@ -38,3 +38,9 @@ Section: admin
 Priority: optional
 Architecture: armel armhf
 Description: forces alsa to route through pulseaudio
+
+Package: imx-powermanagement-config
+Section: admin
+Priority: optional
+Architecture: armel armhf
+Description: Settings for powermanagment for suspend/resume module reloading.

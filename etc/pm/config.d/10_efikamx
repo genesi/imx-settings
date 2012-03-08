@@ -1,0 +1,2 @@
+SUSPEND_MODULES="ehci_hcd"
+SLEEP_MODULES="ehci_hcd"
