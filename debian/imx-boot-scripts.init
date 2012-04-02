@@ -1,15 +1,29 @@
-# efikamx - Prepare modules and settings for Efika MX systems on boot
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          imx-libc-neon
+# Required-Start:    mountdevsubfs
+# X-Start-Before:    hostname keymap keyboard-setup procps pcmcia hwclock hwclockfirst hdparm hibernate-cleanup lvm2
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Prepare modules and settings for Efika MX systems on boot
+# Description:       Prepare modules and settings for Efika MX systems on boot:
+#                    * HDMI audio module preload
+#                    * 
+#                    replacement glibc routines.
+### END INIT INFO
 
-description	"Prepare modules and settings for Efika MX systems on boot"
+PATH=/sbin:/bin  # No remote fs at start
+[ -r /etc/default/efikamx ] && . /etc/default/efikamx
 
-start on (startup
-	  and started udev)
+. /lib/init/vars.sh
 
-emits efikamx
+. /lib/lsb/init-functions
 
-task
 
-script
+ACTION="$1"
+case "$ACTION" in
+  start)
 	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
 
@@ -34,11 +48,6 @@ script
 			machine="${machine} (i.MX515 TO3)"
 		;;
 	esac
-
-	# needed for encrypted home directories
-	if [ -f "/var/lib/dpkg/info/ecryptfs-utils.list" ]; then
-		modprobe ecryptfs
-	fi
 
 	# handle the case where you want to hotplug the monitor and get SPDIF
 	# but we do not load it on boot if there is no SPDIF by default since
@@ -77,10 +86,21 @@ script
 	# set up some compressed in-memory dynamic swap
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
 		if [ ! -b /dev/ramzswap0 ]; then
-			modprobe ramzswap disksize_kb=65536
+			modprobe ramzswap disksize_kb=${RAMZSWAP_SIZE}
 			sleep 1
 			mkswap -f /dev/ramzswap0
 			swapon -p0 /dev/ramzswap0
 		fi
 	fi
-end script
+  stop)
+	;;
+  restart|force-reload)
+	;;
+  status)
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|status}" >&2
+	exit 3
+	;;
+esac
+

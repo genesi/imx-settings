@@ -1,3 +1,10 @@
+imx-settings (2.1.1-201204) unstable; urgency=low
+
+  * Switched to Debian branch
+  * imx-boot-scripts.efikamx now an init script instead of upstart.
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Sat, 31 Mar 2012 02:31:31 +0300
+
 imx-settings (2.1.1-20111019) maverick; urgency=low
 
   * Fix spdif module loading
