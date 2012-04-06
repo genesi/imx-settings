@@ -14,8 +14,6 @@
 ### END INIT INFO
 
 PATH=/sbin:/bin  # No remote fs at start
-[ -r /etc/default/efikamx ] && . /etc/default/efikamx
-
 . /lib/init/vars.sh
 
 . /lib/lsb/init-functions
@@ -64,7 +62,7 @@ case "$ACTION" in
 		if [ -f /sys/class/graphics/fb0/audio ]; then
 			audio=$(cat /sys/class/graphics/fb0/audio)
 		fi
-		if [ "xhdmi" = "x${audio}"]; then
+		if [ "xhdmi" = "x${audio}" ]; then
 			modprobe snd-spdif
 		fi
 	fi
@@ -86,12 +84,13 @@ case "$ACTION" in
 	# set up some compressed in-memory dynamic swap
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
 		if [ ! -b /dev/ramzswap0 ]; then
-			modprobe ramzswap disksize_kb=${RAMZSWAP_SIZE}
+			modprobe ramzswap disksize_kb=131072
 			sleep 1
 			mkswap -f /dev/ramzswap0
 			swapon -p0 /dev/ramzswap0
 		fi
 	fi
+	;;
   stop)
 	;;
   restart|force-reload)

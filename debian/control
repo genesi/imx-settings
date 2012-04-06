@@ -31,7 +31,6 @@ Package: imx-boot-scripts
 Section: admin
 Priority: optional
 Architecture: armel armhf
-Depends: prep-kernel
 Description: modules, rc.local for improved performance on Genesi Efika MX platforms
 
 Package: imx-pulseaudio-config
@@ -45,3 +44,19 @@ Section: admin
 Priority: optional
 Architecture: armel armhf
 Description: Settings for powermanagment for suspend/resume module reloading.
+
+Package: imx-essential
+Section: admin
+Priority: optional
+Architecture: armel armhf
+Depends: xserver-xorg-video-imx, imx-libc-neon, imx-udev-rules, imx-boot-scripts, imx-powermanagement-config, imx-sysctl-rules, imx-pulseaudio-config, gstreamer0.10-fsl-mm-plugins, gir1.2-gst-plugins-base-0.10 (=0.10.36-1.1genesi1), gstreamer0.10-plugins-base (=0.10.36-1.1genesi1), libegl1-imx, libgles1-imx, libgles2-imx, libopenvg1-imx
+Description: Meta package to install efikamx essential packages
+
+Package: imx-essential-dev
+Section: admin
+Priority: optional
+Architecture: armel armhf
+Depends: imx-essential, libgst-fsl-plugins-dev, libipu-dev, libvpu-dev, libkgsl-imx-dev, libc2d-imx-dev, libegl1-imx-dev, libgles1-imx-dev, libgles2-imx-dev, libopenvg1-imx-dev
+Description: Meta package to install efikamx essential development packages
+
+

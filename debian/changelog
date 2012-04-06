@@ -1,3 +1,17 @@
+imx-settings (2.1.1-20120404.1) unstable; urgency=low
+
+  * Actually install imx-boot-scripts.init 
+  * Fix some syntax errors in the init script.
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Wed, 04 Apr 2012 12:39:05 +0300
+
+imx-settings (2.1.1-20120404) unstable; urgency=low
+
+  * Add meta-packages imx-essential and imx-essential-dev.
+  * Remove prep-kernel from imx-boot-scripts dependencies
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Wed, 04 Apr 2012 12:08:26 +0300
+
 imx-settings (2.1.1-201204) unstable; urgency=low
 
   * Switched to Debian branch
