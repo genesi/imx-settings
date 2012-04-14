@@ -1,3 +1,9 @@
+imx-settings (2.1.1-20120414.1) unstable; urgency=low
+
+  * efikamx init script had wrong provides entry.
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Sat, 14 Apr 2012 10:45:49 +0300
+
 imx-settings (2.1.1-20120404.2) unstable; urgency=low
 
   * Fix some syntax errors in the init script.

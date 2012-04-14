@@ -1,6 +1,6 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          imx-libc-neon
+# Provides:          efikamx
 # Required-Start:    mountdevsubfs
 # X-Start-Before:    hostname keymap keyboard-setup procps pcmcia hwclock hwclockfirst hdparm hibernate-cleanup lvm2
 # Required-Stop:
