@@ -1,0 +1,9 @@
+#Attempt to give a custom pulse audio profile to pulseaudio
+#on the Efika MX -- William Schaub <william.schaub@genesi-usa.com>
+SUBSYSTEM!="sound", GOTO="pulseaudio_end"
+ACTION!="change", GOTO="pulseaudio_end"
+KERNEL!="card*", GOTO="pulseaudio_end"
+
+ATTRS{id}=="imx3stack", ENV{PULSE_PROFILE_SET}="efikamx-legacy.conf"
+
+LABEL="pulseaudio_end"
