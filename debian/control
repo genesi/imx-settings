@@ -37,6 +37,7 @@ Package: imx-pulseaudio-config
 Section: admin
 Priority: optional
 Architecture: armel armhf
+Depends: pulseaudio
 Description: forces alsa to route through pulseaudio
 
 Package: imx-powermanagement-config

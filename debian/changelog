@@ -1,3 +1,9 @@
+imx-settings (2.1.1-20120430.1) unstable; urgency=low
+
+  * Added pulseaudio to imx-pulseaudio-config dependecies.
+
+ -- Konstantinos Margaritis <markos@genesi-usa.com>  Mon, 30 Apr 2012 18:25:46 +0000
+
 imx-settings (2.1.1-20120414.1) unstable; urgency=low
 
   * efikamx init script had wrong provides entry.
