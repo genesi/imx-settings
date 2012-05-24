@@ -1,2 +1,8 @@
 etc/asound.conf
+etc/udev/rules.d/89-efikamx-legacy-pulse.rules
+etc/pulse/daemon.conf-smartbook
+etc/pulse/daemon.conf-smarttop
 var/lib/alsa/asound.state
+usr/share/pulseaudio/alsa-mixer/paths/analog-input-efikamx.conf
+usr/share/pulseaudio/alsa-mixer/paths/analog-output-efikamx.conf
+usr/share/pulseaudio/alsa-mixer/profile-sets/efikamx-legacy.conf
