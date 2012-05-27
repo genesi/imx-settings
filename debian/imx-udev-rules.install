@@ -1,1 +1,1 @@
-etc/udev/rules.d/*.rules
+etc/udev/rules.d/10-imx.rules

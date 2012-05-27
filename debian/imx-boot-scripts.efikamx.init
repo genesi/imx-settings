@@ -81,7 +81,7 @@ case "$ACTION" in
 
         #link to the correct pulse config but only if imx-pulseaudio-config
         #is installed
-        if [ -f /etc/pulse/daemon.config-smartbook ]; then
+        if [ -f /etc/pulse/daemon.conf-smartbook ]; then
             rm -f /etc/pulse/daemon.conf
             (cd /etc/pulse/; ln -s daemon.conf-smartbook daemon.conf)
         fi
