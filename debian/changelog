@@ -1,3 +1,9 @@
+imx-settings (2.1.2-20130204) maverick; urgency=low
+
+  * ESS-59: remove postinst messing with /etc/rc.local and /etc/modules
+
+ -- Matt Sealey <matt@genesi-usa.com>  Mon, 04 Feb 2013 11:30:36 +0600
+
 imx-settings (2.1.1-20111019) maverick; urgency=low
 
   * Fix spdif module loading
