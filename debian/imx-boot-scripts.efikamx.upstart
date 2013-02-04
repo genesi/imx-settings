@@ -35,9 +35,16 @@ script
 		;;
 	esac
 
-	# needed for encrypted home directories
-	if [ -f "/var/lib/dpkg/info/ecryptfs-utils.list" ]; then
-		modprobe ecryptfs
+	# fix pulseaudio configuration (this may require a reboot depending on service
+	# start order..) by copying our config over any packaged and updated version
+	# from "upstream"
+	#
+	# this fixes configuration for resamplers, fragment size and others which are
+	# board-specific. Everything else is handled by efikamx.pa
+
+	daemonconf="/usr/share/imx-pulseaudio-config/daemon.conf"
+	if [ -f "${daemonconf}" ]; then
+		cp "${daemonconf}" "/etc/pulse/daemon.conf"
 	fi
 
 	# handle the case where you want to hotplug the monitor and get SPDIF
@@ -49,38 +56,57 @@ script
 
 	if [ "${board}" = "efikamx" ]; then
 		audio="none"
-		if [ -f /sys/class/graphics/fb0/phys-link/audio ]; then
-			audio=$(cat /sys/class/graphics/fb0/phys-link/audio)
+		if [ -f "/sys/class/graphics/fb0/phys-link/audio" ]; then
+			audio="$(cat /sys/class/graphics/fb0/phys-link/audio)"
 		fi
-		if [ -f /sys/class/graphics/fb0/audio ]; then
-			audio=$(cat /sys/class/graphics/fb0/audio)
+		if [ -f "/sys/class/graphics/fb0/audio" ]; then
+			audio="$(cat /sys/class/graphics/fb0/audio)"
 		fi
-		if [ "xhdmi" = "x${audio}"]; then
+		if [ "xhdmi" = "x${audio}" ]; then
 			modprobe snd-spdif
 		fi
 	fi
 
+	# cpufreq_ondemand is blacklisted in our modprobe.d/efikamx.conf to attempt to stop it from
+	# being loaded - changing CPU frequency has some latency to it which causes audio pops and
+	# strange performance artefacts. However, we want to reduce power consumption on the laptop
+	# models to increase battery life, and it is an acceptable compromise in these cases. On nettop
+	# models, we are less concerned for battery life and are more concerned about performance.
+
 	if [ "${board}" = "efikasb" ]; then
-		if [ -f /lib/modules/`uname -r`/kernel/drivers/cpufreq/cpufreq_ondemand.ko ]; then
+		if [ -f "/lib/modules/`uname -r`/kernel/drivers/cpufreq/cpufreq_ondemand.ko" ]; then
 			modprobe cpufreq_ondemand
 		fi
 	fi
 
 	# required modules for all systems
-	if [ -f /lib/modules/`uname -r`/kernel/drivers/mxc/amd-gpu/gpu.ko ]; then	
+	if [ -f "/lib/modules/`uname -r`/kernel/drivers/mxc/amd-gpu/gpu.ko" ]; then
 		modprobe gpu
 	fi
-	if [ -f /lib/modules/`uname -r`/kernel/sound/soc/imx/snd-soc-imx-3stack-sgtl5000.ko ]; then	
+
+	if [ -f "/lib/modules/`uname -r`/kernel/sound/soc/imx/snd-soc-imx-3stack-sgtl5000.ko" ]; then
 		modprobe snd-soc-imx-3stack-sgtl5000
 	fi
 
+	# needed for encrypted home directories
+	if [ -f "/var/lib/dpkg/info/ecryptfs-utils.list" ]; then
+		modprobe ecryptfs
+	fi
+
 	# set up some compressed in-memory dynamic swap
-	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
-		if [ ! -b /dev/ramzswap0 ]; then
+	# this should be handled by /etc/initramfs-tools/hooks.d/compcache but for some reason
+	# it never gets set up properly.
+
+	if [ -f "/lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko" ]; then
+		if [ ! -b "/dev/ramzswap0" ]; then
 			modprobe ramzswap disksize_kb=65536
+
+			# sometimes takes a little while for the block device to appear
 			sleep 1
-			mkswap -f /dev/ramzswap0
-			swapon -p0 /dev/ramzswap0
+			if [ -b "/dev/ramzswap0" ]; then
+				mkswap -f /dev/ramzswap0
+				swapon -p0 /dev/ramzswap0
+			fi
 		fi
 	fi
 end script
