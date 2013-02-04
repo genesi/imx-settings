@@ -1,0 +1,119 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          efikamx
+# Required-Start:    mountdevsubfs
+# X-Start-Before:    hostname keymap keyboard-setup procps pcmcia hwclock hwclockfirst hdparm hibernate-cleanup lvm2
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Prepare modules and settings for Efika MX systems on boot
+# Description:       Prepare modules and settings for Efika MX systems on boot:
+#                    * HDMI audio module preload
+#                    * 
+#                    replacement glibc routines.
+### END INIT INFO
+
+PATH=/sbin:/bin  # No remote fs at start
+. /lib/init/vars.sh
+
+. /lib/lsb/init-functions
+
+
+ACTION="$1"
+case "$ACTION" in
+  start)
+	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
+
+	case "${machine}" in
+		"Genesi Efika MX (Smartbook)")
+			board=efikasb
+		;;
+		"Genesi Efika MX (Smarttop)")
+			board=efikamx
+		;;
+		*)
+			exit 0
+		;;
+	esac
+
+	case "${btype}" in
+		"51020" | "51025")
+			machine="${machine} (i.MX515 TO2)"
+		;;
+
+		"51030")
+			machine="${machine} (i.MX515 TO3)"
+		;;
+	esac
+
+	# handle the case where you want to hotplug the monitor and get SPDIF
+	# but we do not load it on boot if there is no SPDIF by default since
+	# it will possibly direct audio away from the internal speaker
+
+	# ideally we could "reload" this service to get spdif to load if needed at any
+	# time. it will stay loaded until reboot (and only load then if needed)
+
+	if [ "${board}" = "efikamx" ]; then
+		audio="none"
+		if [ -f /sys/class/graphics/fb0/phys-link/audio ]; then
+			audio=$(cat /sys/class/graphics/fb0/phys-link/audio)
+		fi
+		if [ -f /sys/class/graphics/fb0/audio ]; then
+			audio=$(cat /sys/class/graphics/fb0/audio)
+		fi
+		if [ "xhdmi" = "x${audio}" ]; then
+			modprobe snd-spdif
+		fi
+        #link to the correct pulse config but only if imx-pulseaudio-config
+        #is installed
+        if [ -f /etc/pulse/daemon.conf-smarttop ]; then
+            rm -f /etc/pulse/daemon.conf
+            (cd /etc/pulse; ln -s daemon.conf-smarttop daemon.conf)
+        fi
+
+	fi
+
+	if [ "${board}" = "efikasb" ]; then
+		if [ -f /lib/modules/`uname -r`/kernel/drivers/cpufreq/cpufreq_ondemand.ko ]; then
+			modprobe cpufreq_ondemand
+		fi
+
+        #link to the correct pulse config but only if imx-pulseaudio-config
+        #is installed
+        if [ -f /etc/pulse/daemon.conf-smartbook ]; then
+            rm -f /etc/pulse/daemon.conf
+            (cd /etc/pulse/; ln -s daemon.conf-smartbook daemon.conf)
+        fi
+	fi
+
+	# required modules for all systems
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/mxc/amd-gpu/gpu.ko ]; then	
+		modprobe gpu
+	fi
+	if [ -f /lib/modules/`uname -r`/kernel/sound/soc/imx/snd-soc-imx-3stack-sgtl5000.ko ]; then	
+		modprobe snd-soc-imx-3stack-sgtl5000
+	fi
+
+	# set up some compressed in-memory dynamic swap
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/staging/ramzswap/ramzswap.ko ]; then
+		if [ ! -b /dev/ramzswap0 ]; then
+			modprobe ramzswap disksize_kb=131072
+			sleep 1
+			mkswap -f /dev/ramzswap0
+			swapon -p0 /dev/ramzswap0
+		fi
+	fi
+	;;
+  stop)
+	;;
+  restart|force-reload)
+	;;
+  status)
+	;;
+  *)
+	echo "Usage: $SCRIPTNAME {start|stop|restart|force-reload|status}" >&2
+	exit 3
+	;;
+esac
+
