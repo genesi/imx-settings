@@ -4,52 +4,11 @@
 # things with the originals (i.e. we revert previous packages and backup any user additions)
 #
 
-bd=$(date +%s)
-hash=$(md5sum /etc/rc.local 2>/dev/null | awk '{print $1}')
-if [ ! "x${hash}" = "xf6f8bcdead3b7e2ce8d7142ceaa28862" ] && [ -e /etc/rc.local ]; then
-	mv /etc/rc.local "/etc/rc.local.backup-${bd}"
-fi
-
-if [ "x${hash}" = "xf6f8bcdead3b7e2ce8d7142ceaa28862" ] || [ ! -e /etc/rc.local ]; then
-cat << 'EOF' >/etc/rc.local
-#!/bin/sh -e
-#
-# rc.local
-#
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
-exit 0
-EOF
-fi
-
-#DEBHELPER#
-
-hash=$(md5sum /etc/modules 2>/dev/null | awk '{print $1}')
-
-if [ ! "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] && [ -e /etc/modules ]; then
-	mv /etc/modules "/etc/modules.backup-${bd}"
-fi
-
-if [ "x${hash}" = "x1b6e47c2ba97f52b253814ed971d8acd" ] || [ ! -e /etc/modules ]; then
-cat << 'EOF' >/etc/modules
-# /etc/modules: kernel modules to load at boot time.
-#
-# This file contains the names of kernel modules that should be loaded
-# at boot time, one per line. Lines beginning with "#" are ignored.
-EOF
-fi
-
-#Disable atomatic prompting for upgrading to the next release
+# Disable atomatic prompting for upgrading to the next release
 /bin/sed -i 's/^Prompt=.*$/Prompt=never/' /etc/update-manager/release-upgrades
 
-#Update PulseAudio configuration for best performance
-#Arguably will require a reboot. Maybe this should be done in the init script?
+# Update PulseAudio configuration for best performance
+# Arguably will require a reboot. Maybe this should be done in the init script?
 #/bin/sed -i 's/^load-module\ module-udev-detect.*$/load-module\ module-udev-detect tsched=0/' /etc/pulse/default.pa
 #/bin/sed -i 's/^default-fragments.*$/default-fragments\ =\ 10/' /etc/pulse/daemon.conf
 #/bin/sed -i 's/^default-fragment-size-msec.*$/default-fragment-size-msec\ =\ 25/' /etc/pulse/daemon.conf
