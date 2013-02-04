@@ -1,3 +1,14 @@
+imx-settings (2.1.3-20130204) maverick; urgency=low
+
+  * ESS-72: move hibernation configuration to imx-powermanagement-config
+  * ESS-72: remove imx-firefox-prefs since it is obselete
+  * ESS-72: ramzswap size should be 64MB, not 128MB, refine init
+  * ESS-72: imx-pulseaudio-config should depend on pulseaudio
+  * ESS-72: add pulseaudio profiles for UCM (not used on Maverick)
+  * ESS-72: refine audio module loading and configuration replacement
+
+ -- Matt Sealey <matt@genesi-usa.com>  Mon, 04 Feb 2013 14:24:42 +0600
+
 imx-settings (2.1.2-20130204) maverick; urgency=low
 
   * ESS-59: remove postinst messing with /etc/rc.local and /etc/modules
