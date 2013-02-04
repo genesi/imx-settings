@@ -19,13 +19,6 @@ Architecture: armel armhf
 Depends: udev (>= 162-2.2)
 Description: udev rules for devices on Freescale i.MX processors
 
-Package: imx-boot-scripts
-Section: admin
-Priority: optional
-Architecture: armel armhf
-Depends: prep-kernel
-Description: Settings and boot scripts for improved performance on Genesi Efika MX platforms
-
 Package: imx-pulseaudio-config
 Section: admin
 Priority: optional
@@ -38,3 +31,11 @@ Section: admin
 Priority: optional
 Architecture: armel armhf
 Description: Settings for improved power management on Genesi Efika MX platforms
+
+Package: imx-boot-scripts
+Section: admin
+Priority: optional
+Architecture: armel armhf
+Depends: prep-kernel
+Recommends: imx-pulseaudio-config imx-udev-rules imx-sysctl-rules imx-powermanagement-config
+Description: Settings and boot scripts for improved performance on Genesi Efika MX platforms
