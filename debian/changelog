@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20130204) maverick; urgency=low
+
+  * ESS-72: imx-boot-scripts now recommends the other imx -rules & -config packages
+
+ -- Matt Sealey <matt@genesi-usa.com>  Mon, 04 Feb 2013 14:37:55 +0600
+
 imx-settings (2.1.3-20130204) maverick; urgency=low
 
   * ESS-72: move hibernation configuration to imx-powermanagement-config
