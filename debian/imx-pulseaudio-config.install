@@ -1,2 +1,7 @@
 etc/asound.conf
+etc/pulse/efikamx.pa
+usr/share/pulseaudio/daemon.conf
+usr/share/pulseaudio/alsa-mixer/paths/analog-input-efikamx.conf
+usr/share/pulseaudio/alsa-mixer/paths/analog-output-efikamx.conf
+usr/share/pulseaudio/alsa-mixer/profile-sets/efikamx-legacy.conf
 var/lib/alsa/asound.state
