@@ -1,1 +1,2 @@
 etc/pm/config.d/10_efikamx
+etc/polkit-1/localauthority/50-local.d/53-efikamx-hibernate.pkla
