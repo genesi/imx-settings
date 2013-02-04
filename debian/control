@@ -19,13 +19,6 @@ Architecture: armel armhf
 Depends: udev (>= 162-2.2)
 Description: udev rules for devices on Freescale i.MX processors
 
-Package: imx-firefox-prefs
-Section: admin
-Priority: optional
-Architecture: armel armhf
-Depends: firefox (>= 3.6.9)
-Description: Firefox settings for improved performance on Freescale i.MX processors 
-
 Package: imx-boot-scripts
 Section: admin
 Priority: optional
