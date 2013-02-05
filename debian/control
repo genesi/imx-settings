@@ -37,5 +37,5 @@ Section: admin
 Priority: optional
 Architecture: armel armhf
 Depends: prep-kernel
-Recommends: imx-pulseaudio-config imx-udev-rules imx-sysctl-rules imx-powermanagement-config
+Recommends: imx-pulseaudio-config, imx-udev-rules, imx-sysctl-rules, imx-powermanagement-config
 Description: Settings and boot scripts for improved performance on Genesi Efika MX platforms
