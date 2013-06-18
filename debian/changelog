@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20130618) maverick; urgency=low
+
+  * ESS-164: modify 30-imx.conf for better vm performance
+
+ -- Ahmed Ammar <aammar@genesi-usa.com>  Tue, 18 Jun 2013 17:37:55 +0200
+
 imx-settings (2.1.4-20130204) maverick; urgency=low
 
   * ESS-72: imx-boot-scripts now recommends the other imx -rules & -config packages
