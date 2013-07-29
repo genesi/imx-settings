@@ -7,8 +7,6 @@ start on (startup
 
 emits efikamx
 
-task
-
 script
 	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
@@ -20,6 +18,9 @@ script
 		"Genesi Efika MX (Smarttop)")
 			board=efikamx
 		;;
+		"Genesi Efika MX (Slimbook)")
+			board=slimbook
+		;;
 		*)
 			exit 0
 		;;
@@ -29,9 +30,11 @@ script
 		"51020" | "51025")
 			machine="${machine} (i.MX515 TO2)"
 		;;
-
 		"51030")
 			machine="${machine} (i.MX515 TO3)"
+		;;
+		"53020")
+			machine="${machine} (i.MX535 TO2)"
 		;;
 	esac
 
@@ -43,8 +46,11 @@ script
 	# board-specific. Everything else is handled by efikamx.pa
 
 	daemonconf="/usr/share/imx-pulseaudio-config/daemon.conf"
-	if [ -f "${daemonconf}" ]; then
-		cp "${daemonconf}" "/etc/pulse/daemon.conf"
+	if [  "${board}" = "efikamx" -o "${board}" = "efikasb" ]; then
+		cp "${daemonconf}-smart" "/etc/pulse/daemon.conf"
+	fi
+	if [ "${board}" = "slimbook" ]; then
+		cp "${daemonconf}-slim" "/etc/pulse/daemon.conf"
 	fi
 
 	# handle the case where you want to hotplug the monitor and get SPDIF

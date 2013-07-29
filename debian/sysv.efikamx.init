@@ -32,6 +32,9 @@ case "$ACTION" in
 		"Genesi Efika MX (Smarttop)")
 			board=efikamx
 		;;
+		"Genesi Efika MX (Slimbook)")
+			board=slimbook
+		;;
 		*)
 			exit 0
 		;;
@@ -41,9 +44,11 @@ case "$ACTION" in
 		"51020" | "51025")
 			machine="${machine} (i.MX515 TO2)"
 		;;
-
 		"51030")
 			machine="${machine} (i.MX515 TO3)"
+		;;
+		"53020")
+			machine="${machine} (i.MX535 TO2)"
 		;;
 	esac
 
@@ -65,26 +70,24 @@ case "$ACTION" in
 		if [ "xhdmi" = "x${audio}" ]; then
 			modprobe snd-spdif
 		fi
-        #link to the correct pulse config but only if imx-pulseaudio-config
-        #is installed
-        if [ -f /etc/pulse/daemon.conf-smarttop ]; then
-            rm -f /etc/pulse/daemon.conf
-            (cd /etc/pulse; ln -s daemon.conf-smarttop daemon.conf)
-        fi
-
+		#link to the correct pulse config but only if imx-pulseaudio-config
+		#is installed
+		if [ -f /etc/pulse/daemon.conf-smarttop ]; then
+			rm -f /etc/pulse/daemon.conf
+			(cd /etc/pulse; ln -s daemon.conf-smarttop daemon.conf)
+		fi
 	fi
 
 	if [ "${board}" = "efikasb" ]; then
 		if [ -f /lib/modules/`uname -r`/kernel/drivers/cpufreq/cpufreq_ondemand.ko ]; then
 			modprobe cpufreq_ondemand
 		fi
-
-        #link to the correct pulse config but only if imx-pulseaudio-config
-        #is installed
-        if [ -f /etc/pulse/daemon.conf-smartbook ]; then
-            rm -f /etc/pulse/daemon.conf
-            (cd /etc/pulse/; ln -s daemon.conf-smartbook daemon.conf)
-        fi
+		#link to the correct pulse config but only if imx-pulseaudio-config
+		#is installed
+		if [ -f /etc/pulse/daemon.conf-smartbook ]; then
+			rm -f /etc/pulse/daemon.conf
+			(cd /etc/pulse/; ln -s daemon.conf-smartbook daemon.conf)
+		fi
 	fi
 
 	# required modules for all systems
