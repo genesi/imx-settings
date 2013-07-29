@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20130729) maverick; urgency=low
+
+  * remove asound.conf
+
+ -- Ahmed Ammar <aammar@genesi-usa.com>  Mon, 29 Jul 2013 17:37:55 +0200
+
 imx-settings (2.1.4-20130618) maverick; urgency=low
 
   * ESS-164: modify 30-imx.conf for better vm performance
