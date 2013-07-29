@@ -99,6 +99,13 @@ script
 		modprobe ecryptfs
 	fi
 
+	# needed for slimbook wifi
+	if [ "${board}" = "slimbook" ]; then
+		if [ -f "/lib/modules/`uname -r`/updates/cw1200_wlan_sdio.ko" ]; then
+			modprobe cw1200_wlan_sdio
+		fi
+	fi
+
 	# set up some compressed in-memory dynamic swap
 	# this should be handled by /etc/initramfs-tools/hooks.d/compcache but for some reason
 	# it never gets set up properly.
