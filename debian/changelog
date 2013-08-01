@@ -1,8 +1,8 @@
-imx-settings (2.1.4-20130731) maverick; urgency=low
+imx-settings (2.1.4-20130801) maverick; urgency=low
 
   * add sound permission to udev
 
- -- Ahmed Ammar <aammar@genesi-usa.com>  Wed, 31 Jul 2013 17:37:55 +0200
+ -- Ahmed Ammar <aammar@genesi-usa.com>  Wed, 01 Aug 2013 17:37:55 +0200
 
 imx-settings (2.1.4-20130729) maverick; urgency=low
 
