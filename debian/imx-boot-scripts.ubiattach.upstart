@@ -1,0 +1,21 @@
+description	"Mount Slimbook systems' boot partition"
+
+start on mounted
+
+script
+	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
+
+	case "${machine}" in
+		"Genesi Efika MX (Slimbook)")
+			board=slimbook
+		;;
+		*)
+			exit 0
+		;;
+	esac
+
+	ubiattach /dev/ubi_ctrl -m 1
+	mount ubi1:boot -t ubifs /boot
+end script
+

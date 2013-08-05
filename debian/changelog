@@ -1,3 +1,10 @@
+imx-settings (2.1.4-20130805) maverick; urgency=low
+
+  * add clock-up/clock-down init scripts
+  * add ubiattach script
+
+ -- Ahmed Ammar <aammar@genesi-usa.com>  Wed, 05 Aug 2013 17:37:55 +0200
+
 imx-settings (2.1.4-20130801) maverick; urgency=low
 
   * add sound permission to udev

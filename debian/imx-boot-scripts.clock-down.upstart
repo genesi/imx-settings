@@ -1,0 +1,19 @@
+description	"Save slimbook clock systems on shutdown"
+
+start on starting rc RUNLEVEL=[016]
+
+script
+	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
+
+	case "${machine}" in
+		"Genesi Efika MX (Slimbook)")
+			board=slimbook
+		;;
+		*)
+			exit 0
+		;;
+	esac
+
+	exec date > /var/local/local-clock
+end script

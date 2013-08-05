@@ -1,0 +1,21 @@
+description	"Prepare Slimbook systems' clock on boot"
+
+start on (startup
+	  and started mountall)
+
+script
+	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
+	btype=$(grep "^Revision" /proc/cpuinfo | sed 's/Revision\s*:\s*//')
+
+	case "${machine}" in
+		"Genesi Efika MX (Slimbook)")
+			board=slimbook
+		;;
+		*)
+			exit 0
+		;;
+	esac
+
+	exec date -s "`cat /var/local/local-clock`"
+end script
+
