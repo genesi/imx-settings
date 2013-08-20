@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20130820) maverick; urgency=low
+
+  * add video4linux to udev rules
+
+ -- Ahmed Ammar <aammar@genesi-usa.com>  Tue, 20 Aug 2013 17:37:55 +0200
+
 imx-settings (2.1.4-20130805) maverick; urgency=low
 
   * add clock-up/clock-down init scripts
