@@ -16,6 +16,80 @@ script
 		;;
 	esac
 
-	exec date -s "`cat /var/local/local-clock`"
+	# Compare local clock to RTC time
+	echo "this is a test" > /dev/null
+
+	# Script global variables
+	logger="logger -t clock-up"
+
+	READ_RTC_ERR=""
+	READ_RTC_RET=""
+	READ_DATE_RET=""
+
+	raw_read_rtc()
+	{
+		cat /sys/class/rtc/rtc0/since_epoch 2>&1 || true
+	}
+
+	try_read_rtc()
+	{
+		#clear error variable
+		READ_RTC_ERR=""
+
+		# force update
+		raw_read_rtc > /dev/null
+
+		for i in $(seq 5)
+		do
+			READ_RTC_RET=$(raw_read_rtc)
+		
+			# check is integer value
+			case ${READ_RTC_RET} in
+			*[!0-9]* )
+				${logger} "string '$READ_RTC_RET' is not a number: $i"
+				;;
+			*)
+				return 0
+				;;
+			esac
+		done
+
+		READ_RTC_ERR="1"
+	}
+
+	set_date_with_rtc()
+	{
+		local OLD_RTC_TIME="$1"
+
+		try_read_rtc
+		if [ ! -z "${READ_RTC_ERR}" ];
+		then
+			${logger} "Error getting fresher RTC time"
+			READ_RTC_RET="$OLD_RTC_TIME"
+		fi
+
+		date --set="$(date -d @${READ_RTC_RET})" | ${logger}
+	}
+
+	read_date()
+	{
+		local local_clock="$(cat /var/local/local-clock)"
+		READ_DATE_RET="$(date -d"${local_clock}" +%s)"
+	}
+
+	# give RTC time the slight advantage
+
+	read_date
+	try_read_rtc
+
+	if [ ! -z "${READ_RTC_ERR}" ]; then
+		${logger} "Error reading RTC time!"
+		exit 0
+	fi
+
+	if [ "${READ_RTC_RET}" -gt "${READ_DATE_RET}" ];
+	then
+		set_date_with_rtc
+	fi
 end script
 

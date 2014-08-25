@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20140826) maverick; urgency=low
+
+  * add fix for RTC in clock-up upstart job
+
+ -- Chris Jenkins <chris.jenkins@genesi-usa.com>  Wed, 27 Aug 2014 16:53:03 -0500
+
 imx-settings (2.1.4-20130820) maverick; urgency=low
 
   * add video4linux to udev rules
