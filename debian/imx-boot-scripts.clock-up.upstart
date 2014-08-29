@@ -84,12 +84,14 @@ script
 
 	if [ ! -z "${READ_RTC_ERR}" ]; then
 		${logger} "Error reading RTC time!"
-		exit 0
+		READ_RTC_RET=0
 	fi
 
 	if [ "${READ_RTC_RET}" -gt "${READ_DATE_RET}" ];
 	then
-		set_date_with_rtc
+		set_date_with_rtc "${READ_RTC_RET}"
+	else
+        	date --set="$(date -d @${READ_DATE_RET})" | ${logger}
 	fi
 end script
 

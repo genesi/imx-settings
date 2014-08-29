@@ -1,3 +1,9 @@
+imx-settings (2.1.4-20140829) maverick; urgency=low
+
+  * add fix for when RTC not valid / present
+
+ -- Chrisotpher <chris@lumina>  Fri, 29 Aug 2014 16:40:01 -0500
+
 imx-settings (2.1.4-20140826) maverick; urgency=low
 
   * add fix for RTC in clock-up upstart job
