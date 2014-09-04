@@ -44,6 +44,7 @@ realtime-priority = 1
 
 ; load-default-script-file = yes
 ; default-script-file = /etc/pulse/default.pa
+default-script-file = /etc/pulse/efikamx.pa # modified for Efika i.MX53
 
 ; log-target = auto
 ; log-level = notice
