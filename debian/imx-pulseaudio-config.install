@@ -3,5 +3,8 @@ etc/pulse/efikamx.pa
 usr/share/imx-pulseaudio-config/daemon.conf-smart
 usr/share/imx-pulseaudio-config/daemon.conf-slim
 usr/share/pulseaudio/alsa-mixer/paths/analog-input-efikamx.conf
+usr/share/pulseaudio/alsa-mixer/paths/analog-input-efikamx53.conf
 usr/share/pulseaudio/alsa-mixer/paths/analog-output-efikamx.conf
 usr/share/pulseaudio/alsa-mixer/profile-sets/efikamx-legacy.conf
+usr/share/pulseaudio/alsa-mixer/profile-sets/efikamx53.conf
+var/lib/alsa/asound.state

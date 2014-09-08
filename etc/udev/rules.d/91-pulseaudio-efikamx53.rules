@@ -1,0 +1,12 @@
+# This file is part of Genesi's extensions to Pulseaudio
+# for the i.MX53's audio codec, the CS42L52
+#
+# Maintainer: Chris Jenkins <chris.jenkins@genesi-usa.com>
+
+SUBSYSTEM!="sound", GOTO="pulseaudio_genesi_end"
+ACTION!="change", GOTO="pulseaudio_genesi_end"
+KERNEL!="card*", GOTO="pulseaudio_genesi_end"
+
+ATTRS{id}=="efikasbcs42l52", ENV{PULSE_PROFILE_SET}="efikamx53.conf"
+
+LABEL="pulseaudio_genesi_end"
